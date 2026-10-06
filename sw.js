@@ -1,6 +1,6 @@
 // app shell: network-first for the page (always fresh catalogue), cache fallback offline;
 // thumbnails: stale-while-revalidate with a size cap.
-const V = '41090d8ce8', SHELL = 'shell-' + V, IMG = 'thumbs-v1';
+const V = '91b3bba7f5', SHELL = 'shell-' + V, IMG = 'thumbs-v1';
 self.addEventListener('install', e => { e.waitUntil(caches.open(SHELL).then(c => c.addAll(['./', 'manifest.webmanifest', 'icon-192.png']))); self.skipWaiting() });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('shell-') && k !== SHELL).map(k => caches.delete(k))))); self.clients.claim() });
 self.addEventListener('fetch', e => {
